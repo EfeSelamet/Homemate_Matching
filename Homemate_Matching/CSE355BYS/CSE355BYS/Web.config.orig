@@ -1,0 +1,69 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<configuration>
+	<connectionStrings>
+<<<<<<< HEAD
+		<add name="conStr" connectionString="Data Source=BARIS; Database=Homemate_Matching;AttachDBFilename=D:\New folder (2)\MSSQL16.MSSQLSERVER\MSSQL\DATA\Homemate_Matching.mdf;Trusted_Connection=True;MultipleActiveResultSets=True"/>
+=======
+		<add name="conStr" connectionString="Data Source=DESKTOP-J4TDKOM; Database=Homemate_Matching;AttachDBFilename=C:\Program Files\Microsoft SQL Server\MSSQL16.MSSQLSERVER\MSSQL\DATA\Homemate_Matching.mdf;Trusted_Connection=True;MultipleActiveResultSets=True"/>
+>>>>>>> 63dcee7eea2504d306790bc24155d8fed5cc3a5c
+	</connectionStrings>
+
+	<system.web>
+		<compilation debug="true" targetFramework="4.8" />
+		<httpRuntime targetFramework="4.5.2" />
+
+		<authentication mode="Forms">
+			<forms name="SiteName" path="/" loginUrl="~/signIn.aspx" defaultUrl="~/profile.aspx" protection="All" timeout="30" />
+		</authentication>
+
+		<!-- Block anonymous users from all pages by default -->
+		<authorization>
+			<deny users="?" />
+		</authorization>
+	</system.web>
+
+	<!-- Allow anonymous access to signIn and signUp pages -->
+	<location path="signIn.aspx">
+		<system.web>
+			<authorization>
+				<allow users="*" />
+			</authorization>
+		</system.web>
+	</location>
+
+	<location path="signUp.aspx">
+		<system.web>
+			<authorization>
+				<allow users="*" />
+			</authorization>
+		</system.web>
+	</location>
+
+	<appSettings>
+		<add key="owin:AutomaticAppStartup" value="true" />
+	</appSettings>
+
+	<runtime>
+		<assemblyBinding xmlns="urn:schemas-microsoft-com:asm.v1">
+			<dependentAssembly>
+				<assemblyIdentity name="Microsoft.Owin.Security" publicKeyToken="31bf3856ad364e35" culture="neutral" />
+				<bindingRedirect oldVersion="0.0.0.0-4.2.2.0" newVersion="4.2.2.0" />
+			</dependentAssembly>
+			<dependentAssembly>
+				<assemblyIdentity name="Microsoft.Owin" publicKeyToken="31bf3856ad364e35" culture="neutral" />
+				<bindingRedirect oldVersion="0.0.0.0-4.2.2.0" newVersion="4.2.2.0" />
+			</dependentAssembly>
+			<dependentAssembly>
+				<assemblyIdentity name="Newtonsoft.Json" publicKeyToken="30ad4fe6b2a6aeed" culture="neutral" />
+				<bindingRedirect oldVersion="0.0.0.0-13.0.0.0" newVersion="13.0.0.0" />
+			</dependentAssembly>
+		</assemblyBinding>
+	</runtime>
+
+	<system.codedom>
+		<compilers>
+			<compiler language="c#;cs;csharp" extension=".cs" warningLevel="4" compilerOptions="/langversion:default /nowarn:1659;1699;1701;612;618" type="Microsoft.CodeDom.Providers.DotNetCompilerPlatform.CSharpCodeProvider, Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=4.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" />
+			<compiler language="vb;vbs;visualbasic;vbscript" extension=".vb" warningLevel="4" compilerOptions="/langversion:default /nowarn:41008,40000,40008 /define:_MYTYPE=&quot;Web&quot; /optionInfer+" type="Microsoft.CodeDom.Providers.DotNetCompilerPlatform.VBCodeProvider, Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=4.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" />
+		</compilers>
+	</system.codedom>
+</configuration>

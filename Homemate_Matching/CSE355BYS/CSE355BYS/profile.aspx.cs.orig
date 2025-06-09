@@ -1,0 +1,261 @@
+using System;
+using System.Data.SqlClient;
+using System.Configuration;
+using System.Web.UI;
+using static System.Net.Mime.MediaTypeNames;
+// using System.Activities.Expressions; // Bu sat?r kald?r?ld?
+using System.Web.UI.WebControls;
+using System.Xml.Serialization;
+using Microsoft.AspNet.SignalR;
+using System.Web;
+
+namespace Homemate_Matching
+{
+    public partial class profile : System.Web.UI.Page
+    {
+        protected void Page_Load(object sender, EventArgs e)
+        {
+            if (!IsPostBack)
+            {
+                
+             
+                string username = HttpContext.Current.User.Identity.Name;
+                string connectionString = ConfigurationManager.ConnectionStrings["conStr"].ConnectionString;
+
+                using (SqlConnection con = new SqlConnection(connectionString))
+                {
+                    try
+                    {
+                        con.Open();
+
+                        // 1. Get basic user info
+                        string userInfoQuery = "SELECT firstName, lastName, phoneNumber, BirthDate FROM RegistrationInfo WHERE username = @username";
+                        SqlCommand userInfoCmd = new SqlCommand(userInfoQuery, con);
+                        userInfoCmd.Parameters.AddWithValue("@username", username);
+
+                        SqlDataReader reader = userInfoCmd.ExecuteReader();
+                        if (reader.Read())
+                        {
+<<<<<<< Updated upstream
+<<<<<<< Updated upstream
+<<<<<<< Updated upstream
+                            con.Open();
+
+                            // 1. Get basic user info
+                            string userInfoQuery = "SELECT firstName, lastName, phoneNumber, BirthDate FROM RegistrationInfo WHERE username = @username";
+                            SqlCommand userInfoCmd = new SqlCommand(userInfoQuery, con);
+                            userInfoCmd.Parameters.AddWithValue("@username", username);
+
+                            SqlDataReader reader = userInfoCmd.ExecuteReader();
+                            if (reader.Read())
+                            {
+                                lblName.Text = "Name: " + reader["firstName"] + " " + reader["lastName"];
+                                lblPhone.Text = "Phone: " + reader["phoneNumber"];
+                                lblBirthDate.Text = "Birth Date: " + Convert.ToDateTime(reader["BirthDate"]).ToString("yyyy-MM-dd");
+                            }
+                            else
+                            {
+                                lblName.Text = "User not found.";
+                                return;
+                            }
+                            reader.Close();
+
+                            // 2. Get user attributes if they exist
+                            string attrQuery = "SELECT * FROM UserAttribute WHERE username = @username";
+                            SqlCommand attrCmd = new SqlCommand(attrQuery, con);
+                            attrCmd.Parameters.AddWithValue("@username", username);
+
+                            reader = attrCmd.ExecuteReader();
+                            int? homeID = null;
+                            if (reader.Read())
+                            {
+                                lblAttributes.Text = "<b>User Attributes:</b><br/>" +
+                                    "Gender: " + (reader["gender"].ToString() == "1" ? "Male" : "Female") + "<br/>" +
+                                    "Sleep Schedule: " + reader["sleepSchedule"] + "<br/>" +
+                                    "Smoker: " + ((bool)reader["isSmoker"] ? "Yes" : "No") + "<br/>" +
+                                    "Drinker: " + ((bool)reader["isDrinker"] ? "Yes" : "No") + "<br/>" +
+                                    "Hygiene: " + reader["Hygiene"] + "<br/>" +
+                                    "Noisiness: " + reader["noisiness"] + "<br/>" +
+                                    "Guest Frequency: " + reader["GuestFrequency"] + "<br/>" +
+                                    "Is Student: " + ((bool)reader["IsStudent"] ? "Yes" : "No");
+
+                                if (reader["homeID"] != DBNull.Value)
+                                {
+                                    homeID = Convert.ToInt32(reader["homeID"]);
+                                }
+                            }
+                            else
+                            {
+                                lblAttributes.Text = "No attributes entered yet.";
+                            }
+                            reader.Close();
+
+                            // 3. Show house info if user has a house
+                            string homeIDQuery = "SELECT homeID FROM UserAttribute WHERE username = @username AND homeID IS NOT NULL";
+                            SqlCommand homeIDCmd = new SqlCommand(homeIDQuery, con);
+                            homeIDCmd.Parameters.AddWithValue("@username", username);
+
+                            object result = homeIDCmd.ExecuteScalar();
+                            if (result != null && result != DBNull.Value)
+                            {
+                                int home = Convert.ToInt32(result);
+
+                                string houseQuery = @"SELECT * FROM Home WHERE homeID = @homeID";
+                                SqlCommand houseCmd = new SqlCommand(houseQuery, con);
+                                houseCmd.Parameters.AddWithValue("@homeID", home);
+
+                                SqlDataReader houseReader = houseCmd.ExecuteReader();
+                                if (houseReader.Read())
+                                {
+                                    lblHouseInfo.Text = "<b>House Information:</b><br/>" +
+                                        "Location: " + houseReader["Location"] + "<br/>" +
+                                        "Number of Rooms: " + houseReader["NumberOfRooms"] + "<br/>" +
+                                        "Rent: $" + houseReader["Rent"] + "<br/>" +
+                                        "Description: " + houseReader["Description"];
+                                }
+                                houseReader.Close();
+                            }
+                            else
+                            {
+                                lblHouseInfo.Text = "<b>You have not listed a house.</b>";
+                            }
+
+
+                            // 4. Show user preferences if available
+                            string prefQuery = "SELECT * FROM UserPreference WHERE username = @username";
+                            SqlCommand prefCmd = new SqlCommand(prefQuery, con);
+                            prefCmd.Parameters.AddWithValue("@username", username);
+
+                            SqlDataReader prefReader = prefCmd.ExecuteReader();
+                            if (prefReader.Read())
+                            {
+                                lblPreferences.Text = "<b>User Preferences:</b><br/>" +
+                                    "Preferred Gender: " + (prefReader["gender"].ToString() == "1" ? "Male" : "Female") + "<br/>" +
+                                    "Sleep Schedule: " + prefReader["sleepSchedule"] + "<br/>" +
+                                    "Smoker: " + ((bool)prefReader["isSmoker"] ? "Yes" : "No") + "<br/>" +
+                                    "Drinker: " + ((bool)prefReader["isDrinker"] ? "Yes" : "No") + "<br/>" +
+                                    "Budget: $" + prefReader["minBudget"] + " - $" + prefReader["maxBudget"] + "<br/>" +
+                                    "Preferred Location: " + prefReader["desiredHomeLocation"] + "<br/>" +
+                                    "Hygiene Importance: " + prefReader["SignificanceOfHygiene"] + "<br/>" +
+                                    "Noise Sensitivity: " + prefReader["NoiseSensitivity"] + "<br/>" +
+                                    "Guest Preference: " + prefReader["GuestPreference"];
+                            }
+                            else
+                            {
+                                lblPreferences.Text = "No preferences entered yet.";
+                            }
+                            prefReader.Close();
+
+
+
+=======
+                            lblName.Text = "Name: " + reader["firstName"] + " " + reader["lastName"];
+                            lblPhone.Text = "Phone: " + reader["phoneNumber"];
+                            lblBirthDate.Text = "Birth Date: " + Convert.ToDateTime(reader["BirthDate"]).ToString("yyyy-MM-dd");
+>>>>>>> Stashed changes
+=======
+                            lblName.Text = "Name: " + reader["firstName"] + " " + reader["lastName"];
+                            lblPhone.Text = "Phone: " + reader["phoneNumber"];
+                            lblBirthDate.Text = "Birth Date: " + Convert.ToDateTime(reader["BirthDate"]).ToString("yyyy-MM-dd");
+>>>>>>> Stashed changes
+=======
+                            lblName.Text = "Name: " + reader["firstName"] + " " + reader["lastName"];
+                            lblPhone.Text = "Phone: " + reader["phoneNumber"];
+                            lblBirthDate.Text = "Birth Date: " + Convert.ToDateTime(reader["BirthDate"]).ToString("yyyy-MM-dd");
+>>>>>>> Stashed changes
+                        }
+                        else
+                        {
+                            lblName.Text = "User not found.";
+                            return;
+                        }
+                        reader.Close();
+
+                        // 2. Get user attributes if they exist
+                        string attrQuery = "SELECT * FROM UserAttribute WHERE username = @username";
+                        SqlCommand attrCmd = new SqlCommand(attrQuery, con);
+                        attrCmd.Parameters.AddWithValue("@username", username);
+
+                        reader = attrCmd.ExecuteReader();
+                        int? homeID = null;
+                        if (reader.Read())
+                        {
+                            lblAttributes.Text = "<b>User Attributes:</b><br/>" +
+                                "Gender: " + reader["gender"] + "<br/>" +
+                                "Sleep Schedule: " + reader["sleepSchedule"] + "<br/>" +
+                                "Smoker: " + ((bool)reader["isSmoker"] ? "Yes" : "No") + "<br/>" +
+                                "Drinker: " + ((bool)reader["isDrinker"] ? "Yes" : "No") + "<br/>" +
+                                "Hygiene: " + reader["Hygiene"] + "<br/>" +
+                                "Noisiness: " + reader["noisiness"] + "<br/>" +
+                                "Guest Frequency: " + reader["GuestFrequency"] + "<br/>" +
+                                "Is Student: " + ((bool)reader["IsStudent"] ? "Yes" : "No");
+
+                            if (reader["homeID"] != DBNull.Value)
+                            {
+                                homeID = Convert.ToInt32(reader["homeID"]);
+                            }
+                        }
+                        else
+                        {
+                            lblAttributes.Text = "No attributes entered yet.";
+                        }
+                        reader.Close();
+
+                        // 3. Show house info if user has a house
+                        string homeIDQuery = "SELECT homeID FROM UserAttribute WHERE username = @username AND homeID IS NOT NULL";
+                        SqlCommand homeIDCmd = new SqlCommand(homeIDQuery, con);
+                        homeIDCmd.Parameters.AddWithValue("@username", username);
+
+                        object result = homeIDCmd.ExecuteScalar();
+                        if (result != null && result != DBNull.Value)
+                        {
+                            int home = Convert.ToInt32(result);
+
+                            string houseQuery = @"SELECT * FROM Home WHERE homeID = @homeID";
+                            SqlCommand houseCmd = new SqlCommand(houseQuery, con);
+                            houseCmd.Parameters.AddWithValue("@homeID", home);
+
+                            SqlDataReader houseReader = houseCmd.ExecuteReader();
+                            if (houseReader.Read())
+                            {
+                                lblHouseInfo.Text = "<b>House Information:</b><br/>" +
+                                    "Location: " + houseReader["Location"] + "<br/>" +
+                                    "Number of Rooms: " + houseReader["NumberOfRooms"] + "<br/>" +
+                                    "Rent: $" + houseReader["Rent"] + "<br/>" +
+                                    "Description: " + houseReader["Description"];
+                            }
+                            houseReader.Close();
+                        }
+                        else
+                        {
+                            lblHouseInfo.Text = "<b>You have not listed a house.</b>";
+                        }
+
+
+                    }
+                    catch (Exception ex)
+                    {
+                        lblName.Text = "Error: " + ex.Message;
+                        
+                }
+                }
+                
+            }
+        }
+
+        protected void userAttributeBtn_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("userAttributes.aspx");
+        }
+
+        protected void userPreferenceBtn_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("userPreference.aspx");
+        }
+
+        protected void matchBtn_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("matchUp.aspx");
+        }
+    }
+}
