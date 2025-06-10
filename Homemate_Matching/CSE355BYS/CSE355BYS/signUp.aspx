@@ -28,7 +28,7 @@
 
             <div class="input-box">
                 <label for="TextBox4" class="form-label">Kullanıcı Adı</label>
-                <asp:TextBox ID="TextBox4" runat="server" CssClass="form-control" Placeholder="Kullanıcı Adı Giiniz" />
+                <asp:TextBox ID="TextBox4" runat="server" CssClass="form-control" Placeholder="Kullanıcı Adı Giriniz" />
             </div>
 
             <div class="input-box">

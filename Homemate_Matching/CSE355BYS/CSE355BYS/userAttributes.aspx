@@ -1,5 +1,9 @@
 ﻿<%@ Page Language="C#" MasterPageFile="~/template.Master" AutoEventWireup="true" CodeFile="userAttributes.aspx.cs" Inherits="Homemate_Matching.userAttributes" %>
 
+<asp:Content ContentPlaceHolderID="PageTitle" runat="server">
+    Hakkımda Düzenle
+</asp:Content>
+
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
     <div class="container mt-5" style="max-width: 720px;">
         <div class="card shadow">
@@ -77,7 +81,7 @@
                 <div class="mb-4">
                     <label class="form-label fw-semibold">Profil Fotoğrafı Yükle</label>
                     <asp:FileUpload ID="fileUploadProfilePic" runat="server" CssClass="form-control" />
-                    <asp:Button ID="btnUpload" runat="server" Text="Fotoğraf Yükle" OnClick="btnUpload_Click" CssClass="btn btn-secondary mt-2" />
+                    <asp:Button ID="btnUpload" runat="server"    Text="Fotoğraf Yükle" OnClick="btnUpload_Click" CssClass="btn btn-secondary mt-2" />
                     <asp:Image ID="imgProfile" runat="server" Width="150px" Height="150px" Visible="false" CssClass="mt-3 img-thumbnail" />
                     <asp:Label ID="lblUploadStatus" runat="server" ForeColor="Red" CssClass="d-block mt-2"></asp:Label>
                 </div>
@@ -87,7 +91,7 @@
                     <label class="form-check-label" for="<%= chkHasHouse.ClientID %>">Kalacak Hazır evin var mı?</label>
                 </div>
 
-                <asp:Panel ID="pnlHouseInfo" runat="server" Visible="false" CssClass="bg-light p-3 rounded border">
+                <asp:Panel ID="pnlHouseInfo" runat="server" Visible="false"  CssClass="bg-light p-3 rounded border">
                     <h5 class="fw-bold mt-3 mb-3">Ev Bilgileri</h5>
 
                     <div class="row g-3">

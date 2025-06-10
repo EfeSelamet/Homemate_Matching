@@ -3,6 +3,10 @@
 <!DOCTYPE html>
 <html lang="tr">
 <head runat="server">
+    
+
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
     <title><asp:ContentPlaceHolder ID="PageTitle" runat="server" /> - Homemate</title>
     
     <link href="css/bootstrap.min.css" rel="stylesheet" />
@@ -51,7 +55,7 @@
         }
 
         .navbar-left {
-            font-size: 1.8rem; /* Larger app name */
+            font-size: 6rem; /* Larger app name */
             font-weight: 700;
             color: #183153; /* Dark blue for the app name */
             letter-spacing: -0.5px;
@@ -216,22 +220,31 @@
             .sidebar:hover ~ .content {
                 margin-left: 0;
             }
+            /* "Evreka!" yazısını renklendirmek için eklendi */
+            .navbar-left .ev-part {
+                color: #dc3545; /* Canlı ve modern bir kırmızı */
+            }
+
+            .navbar-left .unlem-part {
+                color: #007bff; /* Canlı bir mavi */
+            }
         }
     </style>
 </head>
 <body>
     <form id="form1" runat="server">
         <div class="top-navbar">
-            <div class="navbar-left">Ev Arkadaşım Sensin</div>
+            <div class="navbar-left">
+                <span style="color: red; font-weight: bold; font-size: 40px;">🏡Ev</span><span style="color: black; font-size: 40px;">reka</span><span style="color: dodgerblue; font-weight: bold; font-size: 40px;">!</span>
+            </div>
+
+
             <asp:Button ID="btnSignIn" runat="server" Text="Çıkış Yap" CssClass="btn btn-logout" OnClick="LogOut" />
         </div>
 
         <div class="sidebar">
             <a href="profile.aspx" class="nav-link"> <%-- Active class will be set by JS --%>
                 <i class="bi bi-person"></i><span>Profil</span>
-            </a>
-            <a href="feed.aspx" class="nav-link">
-                <i class="bi bi-house"></i><span>Home Feed Ne Bilmiyorum</span>
             </a>
             <a href="message.aspx" class="nav-link">
                 <i class="bi bi-chat-dots"></i><span>Mesajlar</span>

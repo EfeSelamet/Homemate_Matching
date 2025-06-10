@@ -12,6 +12,7 @@ using System.Runtime.Remoting.Messaging;
 using System.Web;
 using System.Reflection;
 using System.Text;
+using System.Globalization;
 
 
 namespace Homemate_Matching
@@ -20,43 +21,8 @@ namespace Homemate_Matching
     {
         public List<string> GetPotentialUsernames(string currentUsername)
         {
-            List<string> potentialUsernames = new List<string>();
-
-            string connStr = ConfigurationManager.ConnectionStrings["conStr"].ConnectionString;
-            string query = @"
-            SELECT username 
-            FROM RegistrationInfo
-            WHERE username NOT IN (
-                SELECT @username
-                UNION
-                SELECT viewed FROM Accept WHERE viewer = @username
-                UNION
-                SELECT viewed FROM Reject WHERE viewer = @username
-                UNION
-                SELECT username2 FROM Match WHERE username1 = @username
-                UNION
-                SELECT username1 FROM Match WHERE username2 = @username
-            )";
-
-            using (SqlConnection con = new SqlConnection(connStr))
-            {
-                using (SqlCommand cmd = new SqlCommand(query, con))
-                {
-                    cmd.Parameters.AddWithValue("@username", currentUsername);
-                    con.Open();
-
-                    using (SqlDataReader reader = cmd.ExecuteReader())
-                    {
-                        while (reader.Read())
-                        {
-                            string username = reader["username"].ToString();
-                            potentialUsernames.Add(username);
-                        }
-                    }
-                }
-            }
-
-            return potentialUsernames;
+            MatchmakingService ms = new MatchmakingService();
+            return ms.FindTopMatches(currentUsername);
         }
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -104,14 +70,13 @@ namespace Homemate_Matching
                             }
 
                             // User info logic remains the same...
-                            string userInfoQuery = "SELECT firstName, lastName, phoneNumber, BirthDate FROM RegistrationInfo WHERE username = @username";
+                            string userInfoQuery = "SELECT firstName, lastName, BirthDate FROM RegistrationInfo WHERE username = @username";
                             SqlCommand userInfoCmd = new SqlCommand(userInfoQuery, con);
                             userInfoCmd.Parameters.AddWithValue("@username", randomUsername);
                             SqlDataReader reader = userInfoCmd.ExecuteReader();
                             if (reader.Read())
                             {
                                 lblName.Text = reader["firstName"] + " " + reader["lastName"]; // Just the name for the header
-                                lblPhone.Text = "Telefon Numarası: " + reader["phoneNumber"];
                                 lblBirthDate.Text = "Doğum Tarihi: " + Convert.ToDateTime(reader["BirthDate"]).ToString("yyyy-MM-dd");
                             }
                             else
@@ -171,7 +136,7 @@ namespace Homemate_Matching
                                             var houseHtml = new System.Text.StringBuilder("<div class='house-info-grid'>");
 
                                             houseHtml.Append($"<div class='house-item'><span class='house-icon'>📍</span><div><strong>Konum:</strong> {houseReader["Location"]}</div></div>");
-                                            houseHtml.Append($"<div class='house-item'><span class='house-icon'>💰</span><div><strong>Kira:</strong> ${houseReader["Rent"]}</div></div>");
+                                            houseHtml.Append($"<div class='house-item'><span class='house-icon'>💰</span><div><strong>Kira:</strong> {Convert.ToDecimal(houseReader["Rent"]).ToString("N0", new CultureInfo("tr-TR"))}₺</div></div>");
                                             houseHtml.Append($"<div class='house-item'><span class='house-icon'>🚪</span><div><strong>Oda Sayısı:</strong> {houseReader["NumberOfRooms"]} + {houseReader["NumberOfSaloon"]}</div></div>");
                                             houseHtml.Append($"<div class='house-item'><span class='house-icon'>📏</span><div><strong>Alan:</strong> {houseReader["SurfaceArea"]} m²</div></div>");
                                             houseHtml.Append($"<div class='house-item'><span class='house-icon'>🏢</span><div><strong>Kat:</strong> {houseReader["FlatFloor"]} / {houseReader["BuildingFloorCount"]}</div></div>");

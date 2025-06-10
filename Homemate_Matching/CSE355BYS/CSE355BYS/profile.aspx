@@ -1,7 +1,7 @@
 ﻿<%@ Page Language="C#" MasterPageFile="~/template.Master" AutoEventWireup="true" CodeFile="profile.aspx.cs" Inherits="Homemate_Matching.profile" %>
 
 <asp:Content ContentPlaceHolderID="PageTitle" runat="server">
-    My Profile
+    Profilim
 </asp:Content>
 
 <asp:Content ContentPlaceHolderID="MainContent" runat="server">
@@ -164,14 +164,14 @@
         }
 
         .section-title {
-            margin-top: 0 !important; /* Reset default margin */
+            margin-top: 0 !important;
             margin-bottom: 15px !important;
             color: #183153 !important;
-            font-size: 1.7rem; /* Slightly larger section titles */
+            font-size: 1.9rem; /* İsteğiniz üzerine başlık font boyutu büyütüldü */
             display: flex;
             align-items: center;
-            padding-bottom: 10px; /* Space for border-bottom */
-            border-bottom: 2px solid #f0f2f5; /* Subtle separation line */
+            padding-bottom: 10px;
+            border-bottom: 2px solid #f0f2f5;
         }
         .section-title i {
             font-size: 1.8rem; /* Larger icon for titles */

@@ -15,7 +15,6 @@
                     <div class="section-container mb-4">
                         <h4 class="section-title"><i class="bi bi-person-lines-fill me-2"></i>Kullanıcı Bilgileri</h4>
                         <div class="profile-section-box">
-                            <asp:Label ID="lblPhone" runat="server" CssClass="d-block mb-2" />
                             <asp:Label ID="lblBirthDate" runat="server" CssClass="d-block" />
                         </div>
                     </div>

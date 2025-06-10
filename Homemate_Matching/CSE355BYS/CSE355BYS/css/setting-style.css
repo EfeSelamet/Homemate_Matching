@@ -1,0 +1,140 @@
+﻿/* Body stilini buradan kaldırın veya daha spesifik hale getirin */
+/* Eğer sadece arkaplan rengini değiştirmek istiyorsanız, 
+   Master Page'deki ana içerik alanını hedefleyen bir class kullanın. */
+
+.settings-container .card { /* Stilleri daha spesifik hale getirin */
+    border-radius: 18px;
+    background-color: #ffffff;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+    padding: 40px;
+    transition: box-shadow 0.3s ease;
+}
+
+    /* Diğer tüm stilleriniz burada kalabilir... */
+    .settings-container .card:hover {
+        box-shadow: 0 30px 60px rgba(0, 0, 0, 0.12);
+    }
+
+.settings-container p {
+    font-size: 1.25rem;
+    color: #333;
+    margin-bottom: 0.75rem;
+}
+/* Stil kodunuzda herhangi bir değişiklik yapmaya gerek yok, buraya aynen kopyalayabilirsiniz. */
+body {
+    background: linear-gradient(135deg, #ddeeff 0%, #f0f4ff 100%);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.card {
+    border-radius: 18px;
+    background-color: #ffffff;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+    padding: 40px;
+    transition: box-shadow 0.3s ease;
+}
+
+    .card:hover {
+        box-shadow: 0 30px 60px rgba(0, 0, 0, 0.12);
+    }
+
+p {
+    font-size: 1.25rem;
+    color: #333;
+    margin-bottom: 0.75rem;
+}
+
+strong {
+    color: #555;
+}
+
+.form-control { /* input, asp:TextBox için genel stil */
+    border-radius: 10px;
+    border: 2px solid #ced4da;
+    padding: 12px 16px;
+    font-size: 1.1rem;
+    transition: all 0.3s ease;
+    width: 100%;
+    box-sizing: border-box; /* Önemli */
+}
+
+    .form-control:focus {
+        border-color: #4a90e2;
+        box-shadow: 0 0 0 4px rgba(74, 144, 226, 0.15);
+        outline: none;
+    }
+
+.btn { /* Tüm butonlar için temel stil */
+    width: 100%;
+    margin-bottom: 1rem;
+    font-weight: 600;
+    font-size: 1.1rem;
+    transition: all 0.3s ease;
+    border-radius: 10px;
+    padding: 12px;
+}
+
+.btn-outline-primary {
+    border-width: 2px;
+    border-color: #4a90e2;
+    color: #4a90e2;
+    background-color: transparent;
+}
+
+    .btn-outline-primary:hover {
+        background-color: #4a90e2;
+        color: #fff;
+    }
+
+.btn-outline-danger {
+    border-width: 2px;
+    border-color: #e74c3c;
+    color: #e74c3c;
+    background-color: transparent;
+}
+
+    .btn-outline-danger:hover {
+        background-color: #e74c3c;
+        color: #fff;
+    }
+
+.btn-primary {
+    background-color: #4a90e2;
+    border: none;
+    color: #fff;
+}
+
+    .btn-primary:hover {
+        background-color: #357abd;
+    }
+
+.btn-danger {
+    background-color: #e74c3c;
+    border: none;
+    color: #fff;
+    font-size: 1.2rem;
+}
+
+    .btn-danger:hover {
+        background-color: #c0392b;
+    }
+
+.btn-secondary {
+    background-color: #6c757d;
+    border: none;
+    color: #fff;
+}
+
+    .btn-secondary:hover {
+        background-color: #5a6268;
+    }
+
+#usernameSection,
+#passwordSection,
+#deleteSection {
+    background-color: #f1f5f9;
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: inset 0 0 10px #e2e8f0;
+}
+

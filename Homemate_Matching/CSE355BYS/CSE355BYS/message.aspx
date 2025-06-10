@@ -1,5 +1,9 @@
 ﻿<%@ Page Language="C#" MasterPageFile="~/template.Master" AutoEventWireup="true" CodeBehind="message.aspx.cs" Inherits="Homemate_Matching.WebForm2" %>
 
+<asp:Content ContentPlaceHolderID="PageTitle" runat="server">
+    Mesajlar
+</asp:Content>
+
 <asp:Content ContentPlaceHolderID="MainContent" runat="server">
     <div class="chat-wrapper d-flex mt-5">
         <div class="user-list">

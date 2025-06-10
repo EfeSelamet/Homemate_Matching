@@ -1,5 +1,7 @@
 ﻿<%@ Page Language="C#" MasterPageFile="~/template.Master" AutoEventWireup="true" CodeBehind="userPreference.aspx.cs" Inherits="Homemate_Matching.userPreferences" %>
-
+<asp:Content ContentPlaceHolderID="PageTitle" runat="server">
+    Tercihlerimi Düzenle
+</asp:Content>
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
     <div class="container mt-5" style="max-width: 720px;">
         <div class="card shadow">

@@ -2,10 +2,10 @@
 <configuration>
 	<connectionStrings>
 <<<<<<< HEAD
-		<add name="conStr" connectionString="Data Source=BARIS; Database=Homemate_Matching;AttachDBFilename=D:\New folder (2)\MSSQL16.MSSQLSERVER\MSSQL\DATA\Homemate_Matching.mdf;Trusted_Connection=True;MultipleActiveResultSets=True"/>
+		<add name="conStr" connectionString="Data Source=BARIS; Database=Homemate_Matching;AttachDBFilename=D:\New folder (2)\MSSQL16.MSSQLSERVER\MSSQL\DATA\Homemate_Matching.mdf;Trusted_Connection=True;MultipleActiveResultSets=True" />
 =======
 		<add name="conStr" connectionString="Data Source=DESKTOP-J4TDKOM; Database=Homemate_Matching;AttachDBFilename=C:\Program Files\Microsoft SQL Server\MSSQL16.MSSQLSERVER\MSSQL\DATA\Homemate_Matching.mdf;Trusted_Connection=True;MultipleActiveResultSets=True"/>
->>>>>>> 63dcee7eea2504d306790bc24155d8fed5cc3a5c
+>>>>>>> 919ca336fb697899da71db2e3d9acd1e57c51839
 	</connectionStrings>
 
 	<system.web>
@@ -56,6 +56,22 @@
 			<dependentAssembly>
 				<assemblyIdentity name="Newtonsoft.Json" publicKeyToken="30ad4fe6b2a6aeed" culture="neutral" />
 				<bindingRedirect oldVersion="0.0.0.0-13.0.0.0" newVersion="13.0.0.0" />
+			</dependentAssembly>
+			<dependentAssembly>
+				<assemblyIdentity name="System.Memory" publicKeyToken="cc7b13ffcd2ddd51" culture="neutral" />
+				<bindingRedirect oldVersion="0.0.0.0-4.0.2.0" newVersion="4.0.2.0" />
+			</dependentAssembly>
+			<dependentAssembly>
+				<assemblyIdentity name="System.Runtime.CompilerServices.Unsafe" publicKeyToken="b03f5f7f11d50a3a" culture="neutral" />
+				<bindingRedirect oldVersion="0.0.0.0-6.0.1.0" newVersion="6.0.1.0" />
+			</dependentAssembly>
+			<dependentAssembly>
+				<assemblyIdentity name="System.Buffers" publicKeyToken="cc7b13ffcd2ddd51" culture="neutral" />
+				<bindingRedirect oldVersion="0.0.0.0-4.0.4.0" newVersion="4.0.4.0" />
+			</dependentAssembly>
+			<dependentAssembly>
+				<assemblyIdentity name="System.Numerics.Vectors" publicKeyToken="b03f5f7f11d50a3a" culture="neutral" />
+				<bindingRedirect oldVersion="0.0.0.0-4.1.5.0" newVersion="4.1.5.0" />
 			</dependentAssembly>
 		</assemblyBinding>
 	</runtime>
